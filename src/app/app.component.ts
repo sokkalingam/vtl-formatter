@@ -7,7 +7,6 @@ import * as _ from "lodash";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = "VTL Formatter";
   text = "";
   formattedText = "";
 
@@ -15,6 +14,8 @@ export class AppComponent {
   tabOutList = ["#end"];
   tabInOutList = ["#else", "#elseif"];
   conditions = ["#if", "#elseif", "#foreach"];
+
+  NEW_LINE = "\n";
 
   tabLen = 0;
 
@@ -45,16 +46,16 @@ export class AppComponent {
     let firstWord = _.get(_.split(line, " "), 0, "");
     if (_.includes(this.tabInOutList, firstWord)) {
       this.tabLen--;
-      this.formattedText += this.getTab() + line + "\n";
+      this.formattedText += this.getTab() + line + this.NEW_LINE;
       this.tabLen++;
     } else if (_.includes(this.tabInList, firstWord)) {
-      this.formattedText += this.getTab() + line + "\n";
+      this.formattedText += this.getTab() + line + this.NEW_LINE;
       this.tabLen++;
     } else if (_.includes(this.tabOutList, firstWord)) {
       this.tabLen--;
-      this.formattedText += this.getTab() + line + "\n";
+      this.formattedText += this.getTab() + line + this.NEW_LINE;
     } else {
-      this.formattedText += this.getTab() + line + "\n";
+      this.formattedText += this.getTab() + line + this.NEW_LINE;
     }
   }
 
